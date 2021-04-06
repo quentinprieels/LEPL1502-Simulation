@@ -9,7 +9,7 @@
 import matplotlib.pyplot as plt
 
 # From project files
-from main import warningText
+from main.main import warningText
 
 
 def plotSignals(x, signals, signals_names, x_label="", y_label="", title=""):

@@ -5,6 +5,7 @@
 # Version 1.0                                    #
 # ============================================== #
 
+
 def warningText(text):
     """
     Create a warning text.
