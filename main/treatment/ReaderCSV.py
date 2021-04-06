@@ -2,7 +2,7 @@
 # ReaderCSV Class only              #
 # Author : Quentin Prieels          #
 # Date : April 2021                 #
-# Version 1.3                       #
+# Version 1.4                       #
 # ================================= #
 
 # Packages
@@ -294,7 +294,7 @@ class ReaderCSV:
                                                         self.getPreferredUnit())
                         signals[j - 1][i] = signal_value
 
-        return x, signals
+        return x, signals, self.getSignalsNames(), self.getSignalsUnits()
 
     def plot(self, precision=1, title=False):
         """
@@ -306,7 +306,7 @@ class ReaderCSV:
         :return: Create a plot
         """
         # Create the arguments of plotSignals function (see plotsTest.py > plotSignal)
-        x, signals = self.makeSignals(precision)
+        x, signals = self.makeSignals(precision)[:-1]
 
         x_axis_name = self.getAxisNames()[0] + " [" + self.getAxisUnits()[0] + "]"
         y_axis_name = self.getAxisNames()[1] + " [" + self.getAxisUnits()[1] + "]"
