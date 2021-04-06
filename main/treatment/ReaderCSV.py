@@ -268,14 +268,13 @@ class ReaderCSV:
             ValueError('An error occurred during the transformation of units')
 
     # Plot methods
-    def plot(self, precision=1, title=False):
+    def makeSignals(self, precision=1):
         """
-        Displays the data from the CSV file as a graph.
+        Create numpy array with the different signals that can be
         :param precision: Allows to take only a part of the data in the file. This value MUST BE positive
         :type precision: int
-        :param title: Know of the plot must have a title or not
-        :type title: bool
-        :return: Create a plot
+        :return: Return the x list (list of all x-axis points) of size n and a numpy matrix of m signals and length n
+        :rtype: tuple
         """
         # Create the arguments of plotSignals function (see plotsTest.py > plotSignal)
         with open(self.getPath(), 'r') as file:
@@ -294,6 +293,20 @@ class ReaderCSV:
                         signal_value = self.unitsChange(number, self.getSignalsUnits()[j - 1],
                                                         self.getPreferredUnit())
                         signals[j - 1][i] = signal_value
+
+        return x, signals
+
+    def plot(self, precision=1, title=False):
+        """
+        Displays the data from the CSV file as a graph.
+        :param precision: Allows to take only a part of the data in the file. This value MUST BE positive
+        :type precision: int
+        :param title: Know of the plot must have a title or not
+        :type title: bool
+        :return: Create a plot
+        """
+        # Create the arguments of plotSignals function (see plotsTest.py > plotSignal)
+        x, signals = self.makeSignals(precision)
 
         x_axis_name = self.getAxisNames()[0] + " [" + self.getAxisUnits()[0] + "]"
         y_axis_name = self.getAxisNames()[1] + " [" + self.getAxisUnits()[1] + "]"
@@ -346,4 +359,5 @@ class ReaderCSV:
 
 
 if __name__ == '__main__':
-    pass
+    test = ReaderCSV('../../data/exemple.csv', 'test', ['Signal 1', 'Signal 2', 'Signal 3', 'Signal 4'])
+    test.plot()
