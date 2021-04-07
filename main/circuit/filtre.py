@@ -1,7 +1,7 @@
 from main.circuit.circuit import *
 
 # ==== Electrical components and essentially informations ====
-t = np.linspace(0, 0.05, 2000)  # Time [ms]
+t = np.linspace(0, 0.05, 2000)  # Time [s]
 R_F = 1200  # Resistor [ohms]
 C_F = 0.000001  # Capacitor [F]
 f_c = 1 / (2 * np.pi * R_F * C_F)  # Cutoff frequency[Hz]
@@ -10,7 +10,7 @@ a = 2.5  # Amplitude [#]
 f = np.linspace(10, 200, 2000)  # Frequency of entering signal [Hz]
 omega = 2 * np.pi * f  # Angular velocity
 
-# === Functions ====
+# ==== Functions =====
 # 1. Entering functions
 filtre_in = lambda t: a * np.sin(omega * t) + a
 
@@ -39,15 +39,18 @@ def sinus(t):
 # ==== Main program ====
 if __name__ == '__main__':
     # ==== Signals ====
-    Vamp = Signal('$V_{amp}$', ['ms', 'V'], t, f=filtre_in)
+    Vamp = Signal('$V_{amp}$', ['s', 'V'], t, f=filtre_in)
+
     # 1. Perfect filter
     print("==== Signal Perfect ====")
-    VF_p = Signal('$V_F$', ['ms', 'V'], t, f=parfait)
-    Vamp.compareSignals(VF_p, saving=True)
+    VF_p = Signal('$V_F$', ['s', 'V'], t, f=parfait)
+    Vamp.compareSignals(VF_p)
     print("Done\n")
 
     # 2. Filtre simulation with sinus
     print("==== Signal Sinus ====")
-    VF_s = Signal('$V_F$', ['ms', 'V'], t, f=sinus)
-    Vamp.compareSignals(VF_s, saving=True)
+    VF_s = Signal('$V_F$', ['s', 'V'], t, f=sinus)
+    Vamp.compareSignals(VF_s)
     print("Done\n")
+
+    # 3. Filtre Relation fréquence, Tension
