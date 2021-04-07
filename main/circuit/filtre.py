@@ -11,7 +11,7 @@ f = np.linspace(10, 200, 2000)  # Frequency of entering signal [Hz]
 omega = 2 * np.pi * f  # Angular velocity
 
 # === Functions ====
-# 2. Entering functions
+# 1. Entering functions
 filtre_in = lambda t: a * np.sin(omega * t) + a
 
 
@@ -19,7 +19,7 @@ def filtre_in_2(t, w_t):
     return a * np.sin(w_t * t) + a
 
 
-# 1. Filter functions
+# 2. Filter functions
 def parfait(t):
     out = np.empty_like(t)
     for i in range(len(t)):
