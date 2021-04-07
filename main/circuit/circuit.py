@@ -217,17 +217,19 @@ class Signal:
                     y_label=self.getAxisLabels()[1])
 
 
+"""
 class Block:
 
     def __init__(self, name, in_signals, out_signal=None, f=None):
         """
-
+"""
         :param name:
         :param in_signals:
         :type in_signals: list of Signal
         :param out_signal:
         :type out_signal: Signal
         """
+"""
         self.__name = str(name)
         self.__inSignals = in_signals
         self.__outSignal = out_signal
@@ -243,17 +245,19 @@ class Block:
     def getOutSignals(self):
         return self.__outSignal
 
-    def getF(self, *args):
-        return self.__f(*args)
+    def getF(self):
+        return self.__f
 
     # Mutator methods
     def setName(self, new_name):
         """
+"""
         Change the name of the object and check that the length of the new name is behind 144 charters.
         :param new_name: New name for the title of the plot
         :type new_name: str
         :return: Nothing, it just change the instance variable __name
         """
+"""
         if len(new_name) <= 144:
             old_name = self.getName()
             self.__name = str(new_name)
@@ -265,12 +269,12 @@ class Block:
     # Make method
     def makeOutSignal(self):
         return Signal(self.getName() + " - Out Signal", self.getInSignals()[0].getUnits(),
-                      self.getInSignals()[0].getX(), self.getF(*self.getInSignals()))
+                      self.getInSignals()[0].getX(), self.getF())
 
     @staticmethod
     def checkSignal(signal):
         return isinstance(signal, Signal)
-
+"""
 
 if __name__ == '__main__':
     pass
