@@ -12,7 +12,7 @@ import matplotlib.pyplot as plt
 from main.main import warningText
 
 
-def plotSignals(x, signals, signals_names, x_label="", y_label="", title=""):
+def plotSignals(x, signals, signals_names, x_label="", y_label="", title="", saving=False):
     """
     Plot the different signals of the signals list as function of x
     :param x: List of dimension n containing the abscissas at which the signals are evaluated
@@ -21,6 +21,7 @@ def plotSignals(x, signals, signals_names, x_label="", y_label="", title=""):
     :param x_label: Name of horizontal axis
     :param y_label: Name of the vertical axis
     :param title: Title of the plot figure
+    :param saving: To know of the plot will be save or not
     :return: Show a plot of all the signals into a unique graph
     """
     # Size of parameters
@@ -42,8 +43,14 @@ def plotSignals(x, signals, signals_names, x_label="", y_label="", title=""):
     plt.xlabel(x_label)
     plt.ylabel(y_label)
     plt.legend()
-    plt.title(title)
+    if title is not False:
+        plt.title(title)
     plt.show()
+    if saving:
+        frame = str(input('Frame : '))
+        trans = bool(input('Transparent image ? (bool) : '))
+        datas = str(input('Datas ? (False or str) : '))
+        plt.savefig(frame, transparent=trans, metadata={'Description':datas})
 
 
 if __name__ == '__main__':

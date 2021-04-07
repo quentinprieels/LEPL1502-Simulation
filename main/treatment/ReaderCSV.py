@@ -296,7 +296,7 @@ class ReaderCSV:
 
         return x, signals, self.getSignalsNames(), self.getSignalsUnits()
 
-    def plot(self, precision=1, title=False):
+    def plot(self, precision=1, title=False, saving=False):
         """
         Displays the data from the CSV file as a graph.
         :param precision: Allows to take only a part of the data in the file. This value MUST BE positive
@@ -312,11 +312,8 @@ class ReaderCSV:
         y_axis_name = self.getAxisNames()[1] + " [" + self.getAxisUnits()[1] + "]"
 
         # Use of plot function
-        if title:
-            plotSignals(x, signals, self.getSignalsNames(), x_label=x_axis_name, y_label=y_axis_name,
-                        title=self.getName())
-        else:
-            plotSignals(x, signals, self.getSignalsNames(), x_label=x_axis_name, y_label=y_axis_name)
+        plotSignals(x, signals, self.getSignalsNames(), x_label=x_axis_name, y_label=y_axis_name, title=title,
+                    saving=saving)
 
     # Magic Methods
     def __str__(self):

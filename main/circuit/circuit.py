@@ -135,9 +135,9 @@ class Signal:
         print('Name of axis {} where changed by {}'.format(old_names, self.getName()))
 
     # Knowledge methods
-    def plot(self):
+    def plot(self, title=False, saving=False):
         plotSignals(self.getX(), [self.getY()], [self.getName()], x_label=self.getAxisLabels()[0],
-                    y_label=self.getAxisLabels()[1])
+                    y_label=self.getAxisLabels()[1], title=title, saving=saving)
 
     def findAxisNames(self):
         axis_names = ['Unknown', 'Unknown']
@@ -196,7 +196,7 @@ class Signal:
                     x_label=self.getAxisLabels()[0], y_label=self.getAxisLabels()[1])
         print(warningText(msg))
 
-    def compareSignals(self, *args):
+    def compareSignals(self, *args, title=False, saving=False):
         """
         :param args:
         :type args: Signal
@@ -214,7 +214,7 @@ class Signal:
                 print(warningText(msg))
                 continue
         plotSignals(self.getX(), signals, signals_names, x_label=self.getAxisLabels()[0],
-                    y_label=self.getAxisLabels()[1])
+                    y_label=self.getAxisLabels()[1], title=title, saving=saving)
 
 
 """

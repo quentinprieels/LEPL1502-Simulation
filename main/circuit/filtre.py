@@ -41,9 +41,13 @@ if __name__ == '__main__':
     # ==== Signals ====
     Vamp = Signal('$V_{amp}$', ['ms', 'V'], t, f=filtre_in)
     # 1. Perfect filter
+    print("==== Signal Perfect ====")
     VF_p = Signal('$V_F$', ['ms', 'V'], t, f=parfait)
-    Vamp.compareSignals(VF_p)
+    Vamp.compareSignals(VF_p, saving=True)
+    print("Done\n")
 
     # 2. Filtre simulation with sinus
+    print("==== Signal Sinus ====")
     VF_s = Signal('$V_F$', ['ms', 'V'], t, f=sinus)
-    Vamp.compareSignals(VF_s)
+    Vamp.compareSignals(VF_s, saving=True)
+    print("Done\n")
