@@ -306,7 +306,7 @@ class ReaderCSV:
         :return: Create a plot
         """
         # Create the arguments of plotSignals function (see plotsTest.py > plotSignal)
-        x, signals = self.makeSignals(precision)[:-1]
+        x, signals = self.makeSignals(precision)[:-2]
 
         x_axis_name = self.getAxisNames()[0] + " [" + self.getAxisUnits()[0] + "]"
         y_axis_name = self.getAxisNames()[1] + " [" + self.getAxisUnits()[1] + "]"
