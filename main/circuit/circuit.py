@@ -15,9 +15,9 @@ from main.plots import plotSignals
 class Signal:
     # Class Variables
     __units_d = {'V': 'Tension',
-                 'A': 'Ampère',
-                 'O': 'Ohms',
-                 'H': 'Hertz'}
+                 'A': 'Courant',
+                 'O': 'Résistance électrique',
+                 'H': 'Fréquence'}
     __orders = {'k': 1000,
                 '': 1,
                 'm': 0.001,
