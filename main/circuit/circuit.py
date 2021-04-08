@@ -132,7 +132,7 @@ class Signal:
     def setAxisNames(self, x_axis, y_axis):
         old_names = self.getAxisNames()
         self.__axisNames = [str(x_axis), str(y_axis)]
-        print('Name of axis {} where changed by {}'.format(old_names, self.getName()))
+        print('Name of axis {} where changed by {}'.format(old_names, self.getAxisNames()))
 
     # Knowledge methods
     def plot(self, title=False, saving=False):
@@ -146,7 +146,7 @@ class Signal:
 
         try:
             axis_names[1] = self.__units_d[self.getUnits()[1][-1]]
-        except ValueError:
+        except KeyError:
             msg = "y-axis name can not be define, please define them manually."
             print(warningText(msg))
 
