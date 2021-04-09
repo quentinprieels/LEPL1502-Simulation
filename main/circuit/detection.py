@@ -7,12 +7,12 @@ end = 2
 steps = 2000
 time = np.linspace(begin, end, steps)
 
-N = 40  # Number of turns of the wire [#]
-B_cst_val = 1.5  # Value en B near the magnet [T]
-r = 2  # Magnet radius [m]
-b = 2  # Coil radius [m]
+N = 10000  # Number of turns of the wire [#]
+B_cst_val = 0.00015  # Value en B near the magnet [T]
+r = 20  # Magnet radius [m]
+b = 20  # Coil radius [m]
 
-v0 = 20
+v0 = 100
 a = lambda t: -1 / 4 * t
 v = lambda t: -1 / 8 * t ** 2
 
