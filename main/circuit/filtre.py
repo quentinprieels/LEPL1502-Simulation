@@ -1,6 +1,6 @@
 from main.circuit.circuit import *
 
-# ==== Electrical components and essentially informations ====
+# ==== Electrical components and essentially information's ====
 steps = 4000
 
 t = np.linspace(0, 0.1, steps)  # Time [s]

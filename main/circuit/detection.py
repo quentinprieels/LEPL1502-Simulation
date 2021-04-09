@@ -2,30 +2,32 @@ from main.circuit.circuit import *
 np.seterr(all='raise')
 
 # ==== Electrical components and essentially informations ====
-begin = -5
-end = 5
+begin = -2
+end = 2
 steps = 2000
 time = np.linspace(begin, end, steps)
 
-N = 1  # Number of turns of the wire [#]
+N = 40  # Number of turns of the wire [#]
 B_cst_val = 1.5  # Value en B near the magnet [T]
 r = 2  # Magnet radius [m]
 b = 2  # Coil radius [m]
 
-a = lambda t: -1 / 2 * t
-v = lambda t: -1 / 4 * t ** 2 + 6.25
+v0 = 20
+a = lambda t: -1 / 4 * t
+v = lambda t: -1 / 8 * t ** 2
 
 
 # ==== Functions =====
 # 1. B is considered constant, only the intersection area is taken into account
+def d(t):
+    return -1 / 24 * t ** 3 + v0 * t
+
+
 def b_const(t):
     # todo: DON'T WORK A LOT...
 
-    def d(t):
-        return begin + v(t) + ((a(t)*t**2) / 2)
-
     def dd(t):
-        return v(t) + 1/2 * a(t) * t
+        return v(t)
 
     def h(t):
         m = np.zeros(len(t))
@@ -34,7 +36,7 @@ def b_const(t):
                 m[i] = np.sqrt(r ** 2 - ((r ** 2 - b ** 2 + (d(t[i])) ** 2) / (2 * d(t[i]))) ** 2)
             except FloatingPointError:
                 msg = 'Error in sqrt, line 35. i = {}'.format(i)
-                print(warningText(msg))
+                # print(warningText(msg))
                 m[i] = 0
         return m
 
@@ -55,14 +57,17 @@ def b_const(t):
 
 # ==== Main program ====
 if __name__ == '__main__':
-    # 0. Accélération and spreed of magnet
-    print("==== Accélération and spreed of magnet ====")
+    # 0. Acceleration and spreed of magnet
+    print("==== Acceleration and spreed of magnet ====")
     A = Signal('a', ['s', '$m/s^2$'], time, f=a)
     A.setAxisNames('Temps', 'Accélération')
     A.plot()
     V = Signal('v', ['s', '$m/s$'], time, f=v)
     V.setAxisNames('Temps', 'Vitesse')
     V.plot()
+    D = Signal('Position', ['s', 'm'], time, f=d)
+    D.setAxisNames('Temps', 'Distance')
+    D.plot()
     print('Done\n')
 
     # 1. With a B constant
