@@ -33,7 +33,7 @@ if __name__ == '__main__':
     VSWITCH = interrupter(time, VCOMP_out)[:3]
     ISWITCH = interrupter(time, VCOMP_out)[2:]
     plot_signals(time, VSWITCH, ['$V_{B}$', '$V_{C}$', "$V_{comp}$"], x_label="Temps [ms]", y_label="Tension [V]")
-    plot_signals(time, ISWITCH, ['$V_{comp}$', '$I_{B}$', "$I_{C}$"], x_label="Temps [ms]", y_label="Tension [A]")
+    plot_signals(time, ISWITCH, ['$V_{comp}$', '$I_{B}$', "$I_{C}$"], x_label="Temps [ms]", y_label="Courrant [A]")
     plot_signals(time, VSWITCH[:2], ['$V_{B}$', '$V_{C}$'], x_label="Temps [ms]", y_label="Tension [V]")
-    plot_signals(time, ISWITCH[1:], ['$I_{B}$', "$I_{C}$"], x_label="Temps [ms]", y_label="Tension [A]")
+    plot_signals(time, ISWITCH[1:], ['$I_{B}$', "$I_{C}$"], x_label="Temps [ms]", y_label="Courrant [A]")
 
