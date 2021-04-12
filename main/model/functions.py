@@ -97,10 +97,12 @@ def amplification(t, vl):
     """
     if len(t) != len(vl):
         raise ValueError("Time and V_L signal MUST BE have the same length. (For a time value, a V_L value.)")
+    #if isinstance(p_r_amp, float):
+     #   p_r_amp = np.full(steps, p_r_amp)
 
     s = np.zeros(len(t))
     for i in range(len(t)):
-        test = vl[i] * (1 + (p_r_amp / r_amp))
+        test = vl[i] * (1 + (p_r_amp[i] / r_amp))
         if test < 0:
             s[i] = 0
         elif test > 5:
@@ -177,7 +179,7 @@ def comparator(t, vf):
     :rtype: (numpy.ndarray, numpy.ndarray, numpy.ndarray)
     """
     s = np.zeros(len(t))
-    v_ref = p_r_ref * (v_zk / p_r_ref)
+    v_ref = p_r_ref * (v_zk / p_r_ref_vals[1])
     if isinstance(v_ref, float):
         v_ref = np.full(len(t), v_ref)
     for i in range(len(t)):
@@ -207,7 +209,10 @@ def interrupter(t, vcomp):
     :return: The values of the induced voltages and currents (v_b, v_c, i_n and i_c)
     :rtype: (numpy.ndarray, numpy.ndarray, numpy.ndarray, numpy.ndarray)
     """
-    v_b = v_c = i_b = i_c = np.zeros(len(t))
+    v_b = np.zeros(len(t))
+    v_c = np.zeros(len(t))
+    i_b = np.zeros(len(t))
+    i_c = np.zeros(len(t))
     for i in range(len(t)):
         if vcomp[i] == v_cc:  # blocked mode
             i_b[i] = 0
@@ -216,8 +221,8 @@ def interrupter(t, vcomp):
             v_c[i] = 0
 
         elif vcomp[i] == v_ss:  # linear mode
-            i_b[i] = 4.3 / (p_r_b + r_b)
-            i_c[i] = (4.3 * beta) / (p_r_b + r_b)
+            i_b[i] = 4.3 / (p_r_b[i] + r_b)
+            i_c[i] = (4.3 * beta) / (p_r_b[i] + r_b)
             v_b[i] = v_cc - 0.7
             v_c[i] = r_bobine * i_c[i]
 

@@ -14,14 +14,18 @@ if __name__ == '__main__':
     VL = VL[0] / 1000
     VAMP = amplification(time, VL)
     plot_signals(time, VAMP, ['$V_{amp}$', '$V_L$'], x_label="Temps [ms]", y_label="Tension [V]")
+    sin1= lambda t: 0.2 * np.sin(20 * t)
+    VAMP_bis = amplification(time, sin1(time))
+    plot_signals(time, VAMP_bis, ['$V_{amp}$', '$V_L$'], x_label="Temps [ms]", y_label="Tension [V]")
+
 
     # Filter
     VF = filter(np.linspace(0, 0.1, steps), 2.5, np.linspace(10, 200, steps), resolution='sinus')
     plot_signals(np.linspace(0, 0.1, steps), VF, ['$V_F$', '$V_{amp}$'], x_label="Temps [ms]", y_label="Tension [V]")
 
     # Comparator
-    sin = lambda t: 2 * np.sin(10 * t) + 2
-    VCOMP = comparator(time, sin(time))
+    sin2 = lambda t: 2 * np.sin(10 * t) + 2
+    VCOMP = comparator(time, sin2(time))
     plot_signals(time, VCOMP, ['$V_{comp}$', '$V_{F}$', "$V_{ref}$"], x_label="Temps [ms]", y_label="Tension [V]")
 
     # Interrupter
@@ -29,5 +33,7 @@ if __name__ == '__main__':
     VSWITCH = interrupter(time, VCOMP_out)[:3]
     ISWITCH = interrupter(time, VCOMP_out)[2:]
     plot_signals(time, VSWITCH, ['$V_{B}$', '$V_{C}$', "$V_{comp}$"], x_label="Temps [ms]", y_label="Tension [V]")
-    plot_signals(time, ISWITCH, ['$I_{B}$', '$I_{C}$', "$V_{comp}$"], x_label="Temps [ms]", y_label="Tension [A]")
+    plot_signals(time, ISWITCH, ['$V_{comp}$', '$I_{B}$', "$I_{C}$"], x_label="Temps [ms]", y_label="Tension [A]")
+    plot_signals(time, VSWITCH[:2], ['$V_{B}$', '$V_{C}$'], x_label="Temps [ms]", y_label="Tension [V]")
+    plot_signals(time, ISWITCH[1:], ['$I_{B}$', "$I_{C}$"], x_label="Temps [ms]", y_label="Tension [A]")
 
