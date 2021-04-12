@@ -1,4 +1,11 @@
-from main.circuit.circuit import *
+# ==== Imports ====
+from main.circuit.old.circuit import *
+from main.circuit.old.all import VL
+
+# ==== Analytic solution ====
+"""
+V_amp = V_L * (1 + pR/R)
+"""
 
 # ==== Electrical components and essentially informations ====
 begin = -0.05
@@ -13,7 +20,8 @@ pR_amp = np.linspace(pR_amp_val[0], pR_amp_val[1], steps)
 a = 0.2  # Amplitude [#]
 f = 50  # Frequency of entering signal [Hz]
 omega = 2 * np.pi * f  # Angular velocity
-V_L = lambda t: a * np.sin(omega * t)
+# V_L = lambda t: a * np.sin(omega * t)
+V_L = VL.getY()
 
 
 # ==== Functions =====

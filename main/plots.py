@@ -9,19 +9,26 @@
 import matplotlib.pyplot as plt
 
 # From project files
-from main.main import warningText
+from main.HelpFunctions import warningText
 
 
-def plotSignals(x, signals, signals_names, x_label="", y_label="", title="", saving=False):
+def plot_signals(x, signals, signals_names, x_label="", y_label="", title="", saving=False):
     """
     Plot the different signals of the signals list as function of x
     :param x: List of dimension n containing the abscissas at which the signals are evaluated
+    :type x: numpy.ndarray
     :param signals: List m by n of m signals evaluate in n points (the points of x list)
+    :type signals: list of numpy.ndarray
     :param signals_names: List of dimension m containing all the names of the signals
+    :type signals_names: list of str
     :param x_label: Name of horizontal axis
+    :type x_label: str
     :param y_label: Name of the vertical axis
+    :type y_label: str
     :param title: Title of the plot figure
+    :type title: str
     :param saving: To know of the plot will be save or not
+    :type saving: bool
     :return: Show a plot of all the signals into a unique graph
     """
     # Size of parameters

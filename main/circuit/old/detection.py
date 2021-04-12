@@ -1,16 +1,22 @@
-from main.circuit.circuit import *
+# ==== Imports ====
+from main.circuit.old.circuit import *
 np.seterr(all='raise')
 
-# ==== Electrical components and essentially informations ====
-begin = -2
-end = 2
+# ==== Analytic solution ====
+"""
+V_L = N d/dt int_A(t) B ds
+"""
+
+# ==== Electrical components and essentially information's ====
+begin = -5
+end = 5
 steps = 2000
 time = np.linspace(begin, end, steps)
 
-N = 10000  # Number of turns of the wire [#]
-B_cst_val = 0.00015  # Value en B near the magnet [T]
-r = 20  # Magnet radius [m]
-b = 20  # Coil radius [m]
+N = 1  # Number of turns of the wire [#]
+B_cst_val = 1500  # Value en B near the magnet [mT]
+r = 20  # Magnet radius [mm]
+b = 20  # Coil radius [mm]
 
 v0 = 100
 a = lambda t: -1 / 4 * t
@@ -24,21 +30,20 @@ def d(t):
 
 
 def b_const(t):
-    # todo: DON'T WORK A LOT...
 
     def dd(t):
         return v(t)
 
     def h(t):
-        m = np.zeros(len(t))
-        for i in range(len(m)):
+        s = np.zeros(len(t))
+        for i in range(len(s)):
             try:
-                m[i] = np.sqrt(r ** 2 - ((r ** 2 - b ** 2 + (d(t[i])) ** 2) / (2 * d(t[i]))) ** 2)
+                s[i] = np.sqrt(r ** 2 - ((r ** 2 - b ** 2 + (d(t[i])) ** 2) / (2 * d(t[i]))) ** 2)
             except FloatingPointError:
                 msg = 'Error in sqrt, line 35. i = {}'.format(i)
                 # print(warningText(msg))
-                m[i] = 0
-        return m
+                s[i] = 0
+        return s
 
     def dh(t):
         return (dd(t) * ((r ** 2 - b ** 2) ** 2 - (d(t)) ** 4)) / \
@@ -72,6 +77,6 @@ if __name__ == '__main__':
 
     # 1. With a B constant
     print("==== With a B constant ====")
-    VL_bconst = Signal('$V_L$', ['s', 'mV'], time, f=b_const)
+    VL_bconst = Signal('$V_L$', ['ms', 'mV'], time, f=b_const)
     VL_bconst.plot()
     print('Done\n')

@@ -9,8 +9,8 @@
 import numpy as np
 
 # From project files
-from main.plots import plotSignals
-from main.main import warningText
+from main.plots import plot_signals
+from main.HelpFunctions import warningText
 
 
 class ReaderCSV:
@@ -312,8 +312,8 @@ class ReaderCSV:
         y_axis_name = self.getAxisNames()[1] + " [" + self.getAxisUnits()[1] + "]"
 
         # Use of plot function
-        plotSignals(x, signals, self.getSignalsNames(), x_label=x_axis_name, y_label=y_axis_name, title=title,
-                    saving=saving)
+        plot_signals(x, signals, self.getSignalsNames(), x_label=x_axis_name, y_label=y_axis_name, title=title,
+                     saving=saving)
 
     # Magic Methods
     def __str__(self):

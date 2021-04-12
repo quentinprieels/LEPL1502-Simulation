@@ -1,4 +1,14 @@
-from main.circuit.circuit import *
+# ==== Import ====
+from main.circuit.old.circuit import *
+
+# ==== Analytic solution ====
+"""
+f_c = 1/(2pi R C)
+V_F = B sin (omega t + phi) if V_amp = A sin(omega t)
+with :
+B = A / cos(arctan(-R_F * C_F * omega))) - (R_F * C_F * omega * sin(rctan(-R_F * C_F * omega))))
+phi = artan(-R C omega)
+"""
 
 # ==== Electrical components and essentially information's ====
 steps = 4000

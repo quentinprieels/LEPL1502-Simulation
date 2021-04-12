@@ -8,8 +8,8 @@
 import numpy as np
 
 # From project files
-from main.main import warningText
-from main.plots import plotSignals
+from main.HelpFunctions import warningText
+from main.plots import plot_signals
 
 
 class Signal:
@@ -136,8 +136,8 @@ class Signal:
 
     # Knowledge methods
     def plot(self, title=False, saving=False):
-        plotSignals(self.getX(), [self.getY()], [self.getName()], x_label=self.getAxisLabels()[0],
-                    y_label=self.getAxisLabels()[1], title=title, saving=saving)
+        plot_signals(self.getX(), [self.getY()], [self.getName()], x_label=self.getAxisLabels()[0],
+                     y_label=self.getAxisLabels()[1], title=title, saving=saving)
 
     def findAxisNames(self):
         axis_names = ['Unknown', 'Unknown']
@@ -192,8 +192,8 @@ class Signal:
     def autoCompareSignal(self):
         msg = "An equation and a value of y have been given. Here is the comparison of the 2."
 
-        plotSignals(self.getX(), [self.getY(), self.getF(self.getX())], ['Y list', 'Function'],
-                    x_label=self.getAxisLabels()[0], y_label=self.getAxisLabels()[1])
+        plot_signals(self.getX(), [self.getY(), self.getF(self.getX())], ['Y list', 'Function'],
+                     x_label=self.getAxisLabels()[0], y_label=self.getAxisLabels()[1])
         print(warningText(msg))
 
     def compareSignals(self, *args, title=False, saving=False):
@@ -213,8 +213,8 @@ class Signal:
                     format(arg.getName(), len(self.getX()))
                 print(warningText(msg))
                 continue
-        plotSignals(self.getX(), signals, signals_names, x_label=self.getAxisLabels()[0],
-                    y_label=self.getAxisLabels()[1], title=title, saving=saving)
+        plot_signals(self.getX(), signals, signals_names, x_label=self.getAxisLabels()[0],
+                     y_label=self.getAxisLabels()[1], title=title, saving=saving)
 
 
 """
