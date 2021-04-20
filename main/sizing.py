@@ -5,7 +5,7 @@
 N = 100  # Number of turns of the wire [#]
 B_cst_val = 1.5  # Value en B near the magnet [mT]
 r_int = 4  # [ohms]
-v_l = 0.25  # [V]
+v_l = 0.3  # [V]
 margin = 0.8  # [#]
 
 # Amplification
@@ -52,9 +52,9 @@ def find_prref():
 
 # === Main program ===
 if __name__ == '__main__':
-    print('==== Dimensionnement - GR.71 ==== (les valeurs des potentiomètres sont arrondies à l\'unité)')
+    print('==== Dimensionnement - GR.71 ==== (les valeurs des potentiomètres sont arrondies à 2 centièmes près.)')
 
-    print('\033[93mpRb : {:,.0f} ohms \033[0m'.format(find_prb()[0]))
+    print('\033[93mpRb : {:,.2f} ohms \033[0m'.format(find_prb()[0]))
     print('\t - Marge : {:.2%}'.format(1 - margin))
     print('\t - Ic current : {:.3f} [A]'.format(find_prb()[2]))
     print('\t - Vc tension : {:.3f} [V]'.format(find_prb()[1]))
@@ -65,7 +65,7 @@ if __name__ == '__main__':
         print('\t - \033[91mAttention, cette valeur est impossible à obtenir. \033[0m')
     print()
 
-    print('\033[93mpRamp : {:,.0f} ohms \033[0m'.format(find_pramp()))
+    print('\033[93mpRamp : {:,.2f} ohms \033[0m'.format(find_pramp()))
     print('\t - Gain : {:.2%}'.format(g))
     print('\t - v_f tension (v_l)  : {:,.2f} [V]'.format(v_l * g))
     print('\t - v_f tension (v_c)  : {:,.2f} [V]'.format(margin * v_l * g))
@@ -73,10 +73,10 @@ if __name__ == '__main__':
     if find_pramp() > 100000:
         print('\t - \033[91mAttention, cette valeur est impossible à obtenir. \033[0m')
     if (v_l + find_prb()[1]) * g > v_cc:
-        print('\t - \033[91mAttention, a cette valeur, l\'ampli-op va saturer. \033[0m')
+        print('\t - \033[91mAttention, pour cette valeur, l\'ampli-op va saturer. \033[0m')
     print()
 
-    print('\033[93m{:,.0f} ohms < pRref < {:,.0f} ohms \033[0m'.format(find_prref()[0], find_prref()[1]))
+    print('\033[93m{:,.2f} ohms < pRref < {:,.2f} ohms \033[0m'.format(find_prref()[0], find_prref()[1]))
     print('\t - Vref tension : {:.2f} [V] < Vref < {:.2f} [V]'.format(find_prref()[2], find_prref()[3]))
     print('\t - À positionner le plus bas possible.')
     if find_prref()[0] > 100000:
