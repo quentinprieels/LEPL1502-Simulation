@@ -11,11 +11,12 @@ N = 100  # Number of turns of the wire [#]
 B_cst_val = 1.5  # Value en B near the magnet [mT]
 r_int = 2.5  # [ohms]
 v_l = 0.3  # [V]
-margin = 0.4  # [#]
+mr = 60  # [%]
+m = 1 - mr/100  # [#]
 # Pendule 250 mV
 
 
-# Amplification
+# AmplificationS
 r_amp = 5600  # [ohms]
 g = 10  # [#]
 
@@ -38,8 +39,8 @@ v_ss = 0  # [V]
 
 # === Optimisation functions ===
 def find_prb():
-    p_r_b = (4.3 * beta * r_int) / (margin * v_l) - r_b
-    v_c = margin * v_l
+    p_r_b = (4.3 * beta * r_int) / (m * v_l) - r_b
+    v_c = m * v_l
     i_c = v_c / r_int
     return p_r_b, v_c, i_c
 
@@ -66,7 +67,7 @@ if __name__ == '__main__':
     print('==== Dimensionnement - GR.71 ==== (les valeurs des potentiomètres sont arrondies à 2 centièmes près.)')
 
     print('\033[93mpRb : {:,.2f} ohms \033[0m'.format(find_prb()[0]))
-    print('\t - Marge : {:.2%}'.format(1 - margin))
+    print('\t - Marge : {:.2%}'.format(mr/100))
     print('\t - Ic current : {:.2f} [mA]'.format(find_prb()[2] * 1000))
     print('\t - Vc tension : {:.2f} [mV]'.format(find_prb()[1] * 1000))
     print('\t - Vl tension : {:.2f} [mV]'.format(v_l * 1000))
@@ -79,8 +80,8 @@ if __name__ == '__main__':
     print('\033[93mpRamp : {:,.2f} ohms \033[0m'.format(find_pramp()))
     print('\t - Gain : {:.2%}'.format(g))
     print('\t - v_f tension (v_l)  : {:,.2f} [V]'.format(v_l * g))
-    print('\t - v_f tension (v_c)  : {:,.2f} [V]'.format(margin * v_l * g))
-    print('\t - Somme des tensions : {:,.2f} [V]'.format((margin * v_l + v_l) * g))
+    print('\t - v_f tension (v_c)  : {:,.2f} [V]'.format(m * v_l * g))
+    print('\t - Somme des tensions : {:,.2f} [V]'.format((m * v_l + v_l) * g))
     if find_pramp() > 100000:
         print('\t - \033[91mAttention, cette valeur est impossible à obtenir. \033[0m')
     if (v_l + find_prb()[1]) * g > v_cc:
