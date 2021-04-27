@@ -7,9 +7,15 @@
 
 # Package
 import matplotlib.pyplot as plt
+from matplotlib.widgets import Cursor, Button
 
 # From project files
-from main.HelpFunctions import warningText
+from HelpFunctions import warningText
+
+
+def onclick(event):
+    x1, y1 = event.xdata, event.ydata
+    print(x1, y1)
 
 
 def plot_signals(x, signals, signals_names, x_label="", y_label="", title="", saving=False):
@@ -35,6 +41,8 @@ def plot_signals(x, signals, signals_names, x_label="", y_label="", title="", sa
     n = len(x)
     m = len(signals)
 
+    fig, ax = plt.subplots()
+
     # Errors
     if len(signals_names) != m:
         raise ValueError("'signals' and 'signals_name' must have the same size")
@@ -51,8 +59,13 @@ def plot_signals(x, signals, signals_names, x_label="", y_label="", title="", sa
     plt.xlabel(x_label)
     plt.ylabel(y_label)
     plt.legend()
+
+    cursor = Cursor(ax, useblit=True, color='red', linewidth=2)
+
     if title is not False:
         plt.title(title)
+
+    # fig.canvas.mpl_connect('button_press_event', onclick)
     plt.show()
     if saving:
         frame = str(input('Frame : '))

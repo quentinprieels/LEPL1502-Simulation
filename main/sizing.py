@@ -1,12 +1,19 @@
-# import numpy as np
+# ================================= #
+# Sizing predictions                #
+# Author : Quentin Prieels          #
+# Date : April 2021                 #
+# Version 1.2                       #
+# ================================= #
 
 # === Components ===
 # Bobine
 N = 100  # Number of turns of the wire [#]
 B_cst_val = 1.5  # Value en B near the magnet [mT]
-r_int = 4  # [ohms]
+r_int = 2.5  # [ohms]
 v_l = 0.3  # [V]
-margin = 0.8  # [#]
+margin = 0.4  # [#]
+# Pendule 250 mV
+
 
 # Amplification
 r_amp = 5600  # [ohms]
@@ -50,15 +57,19 @@ def find_prref():
     return lower_bound, upper_bound, vref_lower, vref_upper
 
 
+def ic(rtot):
+    return (4.3 * beta)/(rtot)
+
+
 # === Main program ===
 if __name__ == '__main__':
     print('==== Dimensionnement - GR.71 ==== (les valeurs des potentiomètres sont arrondies à 2 centièmes près.)')
 
     print('\033[93mpRb : {:,.2f} ohms \033[0m'.format(find_prb()[0]))
     print('\t - Marge : {:.2%}'.format(1 - margin))
-    print('\t - Ic current : {:.3f} [A]'.format(find_prb()[2]))
-    print('\t - Vc tension : {:.3f} [V]'.format(find_prb()[1]))
-    print('\t - Vl tension : {:.3f} [V]'.format(v_l))
+    print('\t - Ic current : {:.2f} [mA]'.format(find_prb()[2] * 1000))
+    print('\t - Vc tension : {:.2f} [mV]'.format(find_prb()[1] * 1000))
+    print('\t - Vl tension : {:.2f} [mV]'.format(v_l * 1000))
     if find_prb()[2] > 0.75:
         print('\t - \033[91mAttention, risque de surchauffe du transistor. \033[0m')
     if find_prb()[0] > 50000 or 0 > find_prb()[0]:

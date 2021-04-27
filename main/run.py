@@ -1,9 +1,8 @@
-import numpy as np
-
-from main.model.functions import *
-from main.plots import plot_signals
+from functions import *
+from plots import plot_signals
 
 if __name__ == '__main__':
+    """
     # Détection
     VL = detection_b_const(time, -1/4, 100)
     VL_list = []
@@ -17,12 +16,13 @@ if __name__ == '__main__':
     sin1= lambda t: 0.2 * np.sin(20 * t)
     VAMP_bis = amplification(time, sin1(time))
     plot_signals(time, VAMP_bis, ['$V_{amp}$', '$V_L$'], x_label="Temps [ms]", y_label="Tension [V]")
-
+    """
 
     # Filter
     VF = filter(np.linspace(0, 0.1, steps), 2.5, np.linspace(10, 200, steps), resolution='sinus')
     plot_signals(np.linspace(0, 0.1, steps), VF, ['$V_F$', '$V_{amp}$'], x_label="Temps [ms]", y_label="Tension [V]")
 
+    """
     # Comparator
     sin2 = lambda t: 2 * np.sin(10 * t) + 2
     VCOMP = comparator(time, sin2(time))
@@ -36,4 +36,4 @@ if __name__ == '__main__':
     plot_signals(time, ISWITCH, ['$V_{comp}$', '$I_{B}$', "$I_{C}$"], x_label="Temps [ms]", y_label="Courrant [A]")
     plot_signals(time, VSWITCH[:2], ['$V_{B}$', '$V_{C}$'], x_label="Temps [ms]", y_label="Tension [V]")
     plot_signals(time, ISWITCH[1:], ['$I_{B}$', "$I_{C}$"], x_label="Temps [ms]", y_label="Courrant [A]")
-
+    """

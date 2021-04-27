@@ -1,6 +1,4 @@
-import numpy as np
-
-from main.model.components import *
+from components import *
 np.seterr(all='raise')
 
 
